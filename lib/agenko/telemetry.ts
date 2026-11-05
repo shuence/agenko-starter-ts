@@ -147,6 +147,13 @@ export function agenkoTelemetry(): Telemetry & { finish: () => Promise<void> } {
       child.end();
       toolSpans.delete(id);
     },
+    async executeTool({ toolCallId, execute }: any) {
+      // Run the tool (and the Agenko check() inside it) in the chat trace so
+      // receipts attach to this trace instead of creating a separate 0/0 row.
+      const child = toolSpans.get(toolCallId);
+      const ctx = child ? trace.setSpan(rootContext, child) : rootContext;
+      return otelContext.with(ctx, () => Promise.resolve(execute()));
+    },
     async onEnd(event: any) {
       const usage = event?.usage ?? {};
       inputTokens = usage.inputTokens ?? inputTokens;
