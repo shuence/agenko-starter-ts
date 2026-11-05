@@ -113,7 +113,7 @@ export function LoginForm({ next }: { next: string }) {
         type="button"
         onClick={() => {
           setEmail(DEMO_USER);
-          setPassword("demo1234");
+          setPassword("starter-demo-2026");
           setError(null);
         }}
         className="h-11 w-full border border-line-strong font-mono text-[10px] uppercase tracking-[0.14em] text-soft transition-colors hover:border-ink hover:text-ink"

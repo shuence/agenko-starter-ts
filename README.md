@@ -31,7 +31,7 @@ cp .env.example .env        # add AI_GATEWAY_API_KEY
 pnpm dev
 ```
 
-Open http://localhost:3000, hit **Launch demo**, sign in with any email and a 4+ character password, then ask for a refund.
+Open http://localhost:3000, hit **Launch demo**, sign in with any email and a 4+ character password (or use the demo account `starter@agenko.app` / `starter-demo-2026`), then ask for a refund.
 
 Get a key from the [Vercel AI Gateway](https://vercel.com/ai-gateway), or link the project with `vercel link` — the CLI writes a short-lived `VERCEL_OIDC_TOKEN` to `.env.local` and the app uses OIDC instead of a key. The same thing happens automatically on Vercel, so a deployment needs no long-lived secret.
 
