@@ -14,6 +14,9 @@ importers:
       '@ai-sdk/react':
         specifier: ^4.0.167
         version: 4.0.167(react@19.2.4)(zod@4.6.7)
+      '@opentelemetry/api':
+        specifier: ^1.10.0
+        version: 1.10.0
       ai:
         specifier: ^7.0.163
         version: 7.0.163(zod@4.6.7)

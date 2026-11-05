@@ -6,6 +6,8 @@ import {
 import { AGENT_ID, createSupportAgent } from "@/lib/ai/agent";
 import { hasGatewayAuth } from "@/lib/ai/model";
 import { actionFor } from "@/lib/ai/policy";
+import { ensureAgenko, flushAgenko } from "@/lib/agenko/trust";
+import { agenkoTelemetry } from "@/lib/agenko/telemetry";
 import type { AgenkoMessage } from "@/lib/types";
 
 export const runtime = "nodejs";
@@ -21,6 +23,10 @@ export async function POST(req: Request) {
       { status: 500 },
     );
   }
+
+  // Initialise Agenko before the model call so the AI SDK telemetry spans are
+  // exported through the Agenko OpenTelemetry provider.
+  ensureAgenko();
 
   let messages: AgenkoMessage[];
   try {
@@ -51,11 +57,16 @@ export async function POST(req: Request) {
 
   const stream = createUIMessageStream<AgenkoMessage>({
     execute: async ({ writer }) => {
-      const agent = createSupportAgent(writer, { firstStepTool });
+      const telemetry = agenkoTelemetry();
+      const agent = createSupportAgent(writer, { firstStepTool, telemetry });
 
       const result = await agent.stream({
         messages: modelMessages,
         abortSignal: req.signal,
+        onFinish: async () => {
+          await telemetry.finish();
+          await flushAgenko();
+        },
         onToolExecutionStart: ({ toolCall }) => {
           if (debug) console.log(`[${AGENT_ID}] tool:start`, toolCall.toolName);
         },

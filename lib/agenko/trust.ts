@@ -13,11 +13,8 @@ import type { ReceiptPayload } from "./types";
  * when credentials are present.
  */
 
-let bootstrapped = false;
-
 export function ensureAgenko(): void {
-  if (bootstrapped || agenko.isInitialized()) return;
-  bootstrapped = true;
+  if (agenko.isInitialized()) return;
 
   const apiKey = process.env.AGENKO_API_KEY;
   const httpEndpoint =
@@ -34,6 +31,15 @@ export function ensureAgenko(): void {
     serviceName: process.env.AGENKO_SERVICE_NAME ?? "agenko-starter",
     debug: process.env.AGENKO_DEBUG === "1",
   });
+}
+
+/** Flush pending OTLP spans. Required on serverless, where the process freezes. */
+export async function flushAgenko(): Promise<void> {
+  try {
+    await agenko.shutdown();
+  } catch {
+    /* never throw */
+  }
 }
 
 export type CheckedResult<T> = {

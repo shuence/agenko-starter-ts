@@ -5,6 +5,7 @@ import {
   type UIMessageStreamWriter,
 } from "ai";
 import { withReceipt } from "@/lib/agenko/trust";
+import { agenkoTelemetry } from "@/lib/agenko/telemetry";
 import { getGateway, getModelId } from "./model";
 import { SYSTEM_PROMPT } from "./prompt";
 import { createTools } from "./tools";
@@ -23,16 +24,29 @@ export const AGENT_ID = "agenko-support-agent";
  * one receipt per side effect. Irreversible tools are gated with `toolApproval`
  * and never reach `execute` until a human answers.
  */
+type AgentTelemetry = ReturnType<typeof agenkoTelemetry>;
+
+type AgentOptions = {
+  firstStepTool?: ForcedTool;
+  telemetry?: AgentTelemetry;
+};
+
 export function createSupportAgent(
   writer: UIMessageStreamWriter<ReceiptMessage>,
-  { firstStepTool }: { firstStepTool?: ForcedTool } = {},
+  { firstStepTool, telemetry }: AgentOptions = {},
 ) {
+  const integration = telemetry ?? agenkoTelemetry();
   return new ToolLoopAgent({
     id: AGENT_ID,
     model: getGateway()(getModelId()),
     instructions: SYSTEM_PROMPT,
     tools: createTools(writer),
     stopWhen: isStepCount(6),
+    telemetry: {
+      isEnabled: true,
+      functionId: "agenko-starter-chat",
+      integrations: [integration],
+    },
     // Irreversible intent is routed deterministically for step one; later steps
     // are the model's own. The approval gate below still decides execution.
     prepareStep: ({ stepNumber }) =>

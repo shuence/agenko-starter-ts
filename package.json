@@ -2,7 +2,7 @@
   "name": "agenko-starter",
   "version": "0.2.0",
   "private": true,
-  "description": "Agenko starter \u2014 a Next.js AI chat app with a deterministic trust boundary",
+  "description": "Agenko starter — a Next.js AI chat app with a deterministic trust boundary",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,6 +13,7 @@
   "dependencies": {
     "@agenko/sdk": "^0.1.4",
     "@ai-sdk/react": "^4.0.167",
+    "@opentelemetry/api": "^1.10.0",
     "ai": "^7.0.163",
     "clsx": "^2.1.1",
     "lucide-react": "^1.69.0",
