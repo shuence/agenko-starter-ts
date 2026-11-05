@@ -1,0 +1,37 @@
+{
+  "name": "agenko-starter",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Agenko starter \u2014 a Next.js AI chat app with a deterministic trust boundary",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@agenko/sdk": "^0.1.4",
+    "@ai-sdk/react": "^4.0.167",
+    "ai": "^7.0.163",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.69.0",
+    "next": "16.4.5",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "tailwind-merge": "^3.7.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.5",
+    "tailwindcss": "^4",
+    "typescript": "^5.9.0"
+  }
+}
