@@ -1,10 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <g transform="translate(50,50)">
-    <ellipse cx="0" cy="-21" rx="8" ry="21" fill="#4f46ff" transform="rotate(20)"/>
-    <ellipse cx="0" cy="-21" rx="8" ry="21" fill="#4f46ff" transform="rotate(80)"/>
-    <ellipse cx="0" cy="-21" rx="8" ry="21" fill="#4f46ff" transform="rotate(140)"/>
-    <ellipse cx="0" cy="-21" rx="8" ry="21" fill="#4f46ff" transform="rotate(200)"/>
-    <ellipse cx="0" cy="-21" rx="8" ry="21" fill="#4f46ff" transform="rotate(260)"/>
-    <ellipse cx="0" cy="-21" rx="8" ry="21" fill="#4f46ff" transform="rotate(320)"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g transform="translate(50,50)"><ellipse cx="0" cy="-21" fill="#4f46ff" rx="8" ry="21" transform="rotate(20)"/><ellipse cx="0" cy="-21" fill="#4f46ff" rx="8" ry="21" transform="rotate(80)"/><ellipse cx="0" cy="-21" fill="#4f46ff" rx="8" ry="21" transform="rotate(140)"/><ellipse cx="0" cy="-21" fill="#4f46ff" rx="8" ry="21" transform="rotate(200)"/><ellipse cx="0" cy="-21" fill="#4f46ff" rx="8" ry="21" transform="rotate(260)"/><ellipse cx="0" cy="-21" fill="#4f46ff" rx="8" ry="21" transform="rotate(320)"/></g></svg>
